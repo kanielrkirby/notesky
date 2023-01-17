@@ -5,6 +5,7 @@ import App from './App'
 import { UserProvider } from './utils/User'
 import './samples/node-api'
 import './index.css'
+import '@picocss/pico'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
