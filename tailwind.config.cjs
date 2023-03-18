@@ -11,12 +11,12 @@ module.exports = {
       },
       colors: {
         primary: {
-          light: "#C294EA",
-          dark: "#7C6392",
+          light: "var(--color-primary-light)",
+          dark: "var(--color-primary-dark)",
         },
         secondary: {
-          light: "#DC8686",
-          dark: "#738DAB",
+          light: "var(--color-secondary-light)",
+          dark: "var(--color-secondary-dark)",
         },
         onyx: {
           main: "#0C0C0F",

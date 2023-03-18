@@ -9,6 +9,13 @@
     url("/src/assets/fonts/Nunito/static/Nunito-Regular.ttf") format("truetype");
 }
 
+:root {
+  --color-primary-light: #c294ea;
+  --color-primary-dark: #7c6392;
+  --color-secondary-light: #dc8686;
+  --color-secondary-dark: #738dab;
+}
+
 body {
   @apply font-body dark:bg-onyx-main bg-crystal-main text-onyx-main dark:text-crystal-main;
 }
