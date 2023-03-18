@@ -38,10 +38,10 @@ const SettingsProvider = ({
 }: {
   children: JSX.Element[] | JSX.Element;
 }) => {
+  // Options
   const [options, setOptions] = useState<Options>(pull());
 
-  useEffect(handleSettings, [options]);
-
+  // Sets the option specified
   function set(key: string, value: any) {
     setOptions({
       ...options,
@@ -50,18 +50,25 @@ const SettingsProvider = ({
     localStorage.setItem("settings", JSON.stringify(options));
   }
 
+  // Gets the option specified
   function get(key: string) {
     return options[key];
   }
 
+  // Pulls the options from local storage
   function pull() {
     const stored = localStorage.getItem("settings");
     if (stored) return JSON.parse(stored);
+    localStorage.setItem("settings", JSON.stringify(defaultOptions));
     return {};
   }
 
+  // Use effect hook to update everything when the options change
+
+  useEffect(handleSettings, [options]);
+
   function handleSettings() {
-    // Variables
+    // Local variables
 
     const html = document.documentElement;
     const root = getComputedStyle(html);
@@ -121,5 +128,3 @@ function useSettings() {
 }
 
 export { SettingsProvider, useSettings };
-
-// Handle all the logic for the settings that are set
