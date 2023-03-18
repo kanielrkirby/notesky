@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["src/**/*.{js,jsx,ts,tsx,html}", "index.html"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -21,8 +22,8 @@ module.exports = {
           main: "#0C0C0F",
           secondary: "#111113",
         },
-        other: {
-          main: "#EDEDF3",
+        crystal: {
+          main: "#EFEFFF",
           secondary: "#DBDBEC",
         },
       },
