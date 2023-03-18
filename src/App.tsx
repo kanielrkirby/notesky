@@ -1,22 +1,36 @@
-import { useContext } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { UserContext, UserContextI } from './utils/User'
+import { useState } from "react";
+import { invoke } from "@tauri-apps/api/tauri";
+import { Routes, Route, Outlet } from "react-router-dom";
+import Home from "./pages/Home";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
+// import Note from "./pages/Note";
+// import Create from "./pages/Create";
+// import Navbar from "./components/Navbar";
 
-function App() {
-	const { user, signInWithGoogle, signOut, editProfile } = useContext(UserContext) as UserContextI
-	return (
-		<div className='App'>
-			<Routes>
-				<Route path='/' element={<>home</>} />
-				<Route path='/notes' element={<>notes</>} />
-				<Route path='/notes/:id' element={<>note with id</>} />
-				<Route path='/login' element={<>login</>} />
-				<Route path='/signup' element={<>signup</>} />
-				<Route path='/settings' element={<>settings</>} />
-				<Route path='*' element={<>404</>} />
-			</Routes>
-		</div>
-	)
+function Wrapper() {
+  return (
+    <>
+      {/* <Navbar /> */}
+      <Outlet />
+    </>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Wrapper />}>
+        <Route index element={<Home />} />
+        {/* <Route path="about" element={<About />} /> */}
+        {/* <Route path="note/:id" element={<Note />} /> */}
+        {/* <Route path="create" element={<Create />} /> */}
+      </Route>
+    </Routes>
+  );
+}
+
+// async function greet() {
+//   // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
+//   setGreetMsg(await invoke("greet", { name }));
+// }

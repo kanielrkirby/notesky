@@ -1,0 +1,21 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@font-face {
+  font-family: "Nunito-Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Nunito-Regular"), local("Nunito-Regular"),
+    url("Nunito-Regular.ttf") format("truetype");
+}
+
+html {
+  @apply font-body dark:bg-black bg-white text-black dark:text-white;
+}
+
+html,
+body,
+#root,
+.App {
+  @apply w-full h-full;
+}
