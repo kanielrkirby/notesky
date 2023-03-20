@@ -8,12 +8,25 @@
   src: local("Nunito-Regular"), local("Nunito-Regular"),
     url("/src/assets/fonts/Nunito/static/Nunito-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: "Tangerine";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Tangerine-Bold"), local("Tangerine-Bold"),
+    url("/src/assets/fonts/Tangerine/Tangerine-Bold.ttf") format("truetype");
+}
 
 :root {
   --color-primary-light: #c294ea;
   --color-primary-dark: #7c6392;
   --color-secondary-light: #dc8686;
   --color-secondary-dark: #738dab;
+}
+
+html,
+body,
+#root {
+  @apply h-full w-full;
 }
 
 body {

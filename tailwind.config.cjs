@@ -7,7 +7,7 @@ module.exports = {
       fontFamily: {
         body: "Nunito",
         heading: "",
-        logo: "",
+        logo: "Tangerine",
       },
       colors: {
         primary: {

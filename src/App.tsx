@@ -7,15 +7,18 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
 import Note from "./pages/Note";
-import Create from "./pages/Create";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 function Wrapper() {
   return (
-    <>
-      <Navbar />
-      <Outlet />
-    </>
+    <div className="flex h-full w-full">
+      <Sidebar />
+      <div className="flex flex-col w-full">
+        <Navbar />
+        <Outlet />
+      </div>
+    </div>
   );
 }
 
@@ -26,7 +29,6 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="note/:id" element={<Note />} />
-        <Route path="create" element={<Create />} />
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route path="/login" element={<Login />} />
