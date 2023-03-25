@@ -1,5 +1,5 @@
 import Logo from "../assets/Logo";
-import NotesList from "../assets/NotesList";
+import NotesList from "./NotesList";
 
 export default function Sidebar() {
   return (

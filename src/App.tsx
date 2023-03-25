@@ -14,7 +14,7 @@ function Wrapper() {
   return (
     <div className="flex h-full w-full">
       <Sidebar />
-      <div className="flex flex-col w-full">
+      <div className="flex w-full flex-col">
         <Navbar />
         <Outlet />
       </div>
