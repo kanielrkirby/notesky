@@ -8,6 +8,7 @@ export default function Note() {
   console.log(id);
   const { data, isLoading, error } = useQuery(["note"], async () => {
     const { data: note } = await supabase.from("notes").select("*");
+    console.log(note);
     return note;
   });
 
