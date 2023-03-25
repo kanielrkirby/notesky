@@ -3,8 +3,8 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { Routes, Route, Outlet } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 import Note from "./pages/Note";
 import Navbar from "./components/Navbar";
@@ -31,8 +31,8 @@ export default function App() {
         <Route path="note/:id" element={<Note />} />
         <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
   );
 }

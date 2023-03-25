@@ -1,15 +1,20 @@
 import { useQuery } from "react-query";
+import Note from "../types/Note";
 import supabase from "../utils/supabase";
 
-export default function useNotes(id: string) {
-  const { data, isLoading, error } = useQuery(["note"], async () => {
+export default function useNotes(userId?: string) {
+  async function fetchNotes(): Promise<{ title: string; id: string }[] | null> {
     const { data: notes } = await supabase
       .from("notes")
-      .select("title")
-      .filter("owner", "eq", id);
-    console.log(notes);
+      .select("title, id, owner");
     return notes;
-  });
+  }
 
-  return { data, isLoading, error };
+  const {
+    data: notes,
+    isLoading,
+    error,
+  } = useQuery(["note"], fetchNotes, { enabled: !!userId });
+
+  return { notes, isLoading, error };
 }
