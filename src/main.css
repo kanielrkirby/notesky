@@ -1,6 +1,7 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
 @font-face {
   font-family: "Nunito";
   font-style: normal;
@@ -30,5 +31,5 @@ body,
 }
 
 body {
-  @apply font-body dark:bg-onyx-main bg-crystal-main text-onyx-main dark:text-crystal-main;
+  @apply bg-crystal-main font-body text-onyx-main dark:bg-onyx-main dark:text-crystal-main;
 }
