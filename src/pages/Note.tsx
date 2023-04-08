@@ -4,25 +4,22 @@ import MainCard from "../components/CardComponents";
 import useNotes from "../hooks/useNotes";
 import supabase from "../utils/supabase";
 import NoteEditor from "../components/NoteEditor";
+import { RawDraftContentState } from "draft-js";
 
 export default function Note() {
   const { id } = useParams<{ id: string }>();
-  const [noteContent, setNoteContent] = useState("");
   const notes = useNotes();
   const note = notes.notes?.find((note) => note.id === id)!;
-  console.log(note);
-  useEffect(() => {
-    if (!note) return;
-    setNoteContent(note.content);
-  }, [note]);
   if (!note) return null;
 
-  async function saveContent() {
+  async function saveContent(content: RawDraftContentState) {
+    console.log(content);
     try {
-      await supabase
-        .from("notes")
-        .update({ content: noteContent })
+      const notes = supabase.from("notes");
+      const res = await notes
+        .update({ content: JSON.stringify(content) })
         .eq("id", id);
+      console.log(res);
     } catch (error) {
       console.error(error);
     }
@@ -32,9 +29,14 @@ export default function Note() {
     <MainCard>
       <h1 className="self-center">{note.title}</h1>
       <p className="self-center opacity-50">{note.subtitle}</p>
-      <NoteEditor content={note.content} />
-      {/* <p>{note.created_at}</p> */}
-      {/* <p>{note.updated_at}</p> */}
+      <NoteEditor
+        content={
+          typeof note?.content === "string"
+            ? (JSON.parse(note.content) as RawDraftContentState)
+            : undefined
+        }
+        saveContent={saveContent}
+      />
     </MainCard>
   );
 }

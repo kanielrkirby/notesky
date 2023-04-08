@@ -1,19 +1,44 @@
-import { Editor, EditorState, RichUtils, ContentState } from "draft-js";
+import Draft, {
+  Editor,
+  EditorState,
+  RichUtils,
+  ContentState,
+  convertFromRaw,
+  RawDraftContentState,
+  convertToRaw,
+} from "draft-js";
 import { useState } from "react";
 import "draft-js/dist/Draft.css";
 
-export default function NoteEditor({ content }: { content: string }) {
+export default function NoteEditor({
+  content,
+  saveContent,
+}: {
+  content?: RawDraftContentState;
+  saveContent: (content: RawDraftContentState) => Promise<void>;
+}) {
+  const clean = content ? convertFromRaw(content) : undefined;
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithContent(ContentState.createFromText(content)),
+    clean ? EditorState.createWithContent(clean) : EditorState.createEmpty(),
   );
-
   function handleKeyCommand(command: string, editorState: EditorState) {
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      setEditorState(newState);
-      return "handled";
+    switch (command) {
+      case "bold":
+        setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
+        return "handled";
+      case "italic":
+        setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
+        return "handled";
+      case "underline":
+        setEditorState(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
+        return "handled";
+      case "save":
+        const raw = convertToRaw(editorState.getCurrentContent());
+        saveContent(raw);
+        return "handled";
+      default:
+        return "not-handled";
     }
-    return "not-handled";
   }
 
   return (
@@ -52,10 +77,21 @@ export default function NoteEditor({ content }: { content: string }) {
           onChange={setEditorState}
           handleKeyCommand={handleKeyCommand}
           keyBindingFn={(e) => {
-            if ((e.key === "s" || e.key === "S") && (e.metaKey || e.ctrlKey)) {
-              return "save";
+            const key = e.key.toLowerCase();
+            if (!["b", "i", "u", "s"].includes(key)) return null;
+            if (e.metaKey || e.ctrlKey) {
+              switch (key) {
+                case "b":
+                  return "bold";
+                case "i":
+                  return "italic";
+                case "u":
+                  return "underline";
+                case "s":
+                  return "save";
+              }
             }
-            return "not-handled";
+            return null;
           }}
         />
       </div>

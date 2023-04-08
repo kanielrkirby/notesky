@@ -7,7 +7,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import NotFound from "./pages/NotFound";
 import Note from "./pages/Note";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
 function Wrapper() {
